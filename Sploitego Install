@@ -1,0 +1,99 @@
+sudo apt-get install chromium-browser
+sudo apt-get install dpkg
+sudo dpkg -i Maltego*
+jdkhome="/usr/lib/jvm/java-7-openjdk-amd64/jre"
+sudo apt-get install ubuntu-restricted-extras
+sudo apt-get install ubuntu-restricted-addons
+sudo apt-get install openjdk-8-jre
+jdkhome="/usr/lib/jvm/java-7-openjdk-amd64/jre"
+sudo apt-get install python2.7 python-virtualenv python-setuptools
+sudo apt-get install libxml2-dev
+sudo apt-get install python-lxml libxslt1-dev
+sudo apt-get install libxslt-dev
+sudo apt-get install python-dev
+sudo easy_install canari
+sudo apt-get install build-essential libssl-dev libffi-dev python-dev
+sudo apt-get install python3-pyside
+sudo apt-get install git
+git clone https://github.com/allfro/sploitego.git
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:george-edison55/cmake-3.x
+sudo apt-get install cmake
+sudo apt-get install qt4-qmake
+sudo apt-get install qt4-dev-tools
+sudo easy_install pip
+
+
+
+
+
+#pyside is SLOW to install
+sudo pip install pyside
+cd sploitego/
+sudo python setup.py install
+canari install-package sploitego
+#Metasploit
+sudo add-apt-repository -y ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get -y install oracle-java8-installer
+sudo apt install oracle-java8-set-default
+sudo apt-get install build-essential libreadline-dev libssl-dev libpq5 libpq-dev libreadline5 libsqlite3-dev libpcap-dev git-core autoconf postgresql pgadmin3 curl zlib1g-dev libxml2-dev libxslt1-dev xtightvncviewer libyaml-dev curl zlib1g-dev
+sudo apt-get install -y libreadline-dev
+sudo apt-get update
+sudo apt-get upgrade
+
+#RUBY
+cd ~
+git clone git://github.com/sstephenson/rbenv.git .rbenv
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+exec $SHELL
+git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+# sudo plugin so we can run Metasploit as root with "rbenv sudo msfconsole" 
+git clone git://github.com/dcarley/rbenv-sudo.git ~/.rbenv/plugins/rbenv-sudo
+exec $SHELL
+RUBYVERSION=$(wget https://raw.githubusercontent.com/rapid7/metasploit-framework/master/.ruby-version -q -O - )
+rbenv install $RUBYVERSION
+rbenv global $RUBYVERSION
+ruby -v
+
+#NMAP
+mkdir ~/Development
+cd ~/Development
+git clone https://github.com/nmap/nmap.git
+cd nmap 
+./configure
+make
+sudo make install
+make clean
+
+#Install & Configuring PostgreSQL
+sudo apt-get install postgresql postgresql-contrib
+sudo -s
+su postgres
+createuser msf -P -S -R -D
+createdb -O msf msf
+exit
+exit
+
+#Install Metasploit
+cd /opt
+sudo git clone https://github.com/rapid7/metasploit-framework.git
+sudo chown -R `whoami` /opt/metasploit-framework
+cd metasploit-framework
+sudo apt-get install python-psycopg2
+sudo apt-get install libpq-dev
+sudo apt-get install libpcap-dev
+sudo apt-get install libsqlite3-dev
+gem install bundler
+bundle install
+sudo bash -c 'for MSF in $(ls msf*); do ln -s /opt/metasploit-framework/$MSF /usr/local/bin/$MSF;done'
+
+#Run Maltego and login
+
+canari install-package sploitego
+
+
+
+
